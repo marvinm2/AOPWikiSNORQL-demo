@@ -1,9 +1,9 @@
 #This SPARQL query extracts all chemical identifiers mapped to stressor chemicals
-SELECT ?CAS ?ChemicalName ?MatchingID
+SELECT ?CAS ?ChemicalName ?MatchingID #?ChEBI
 WHERE {
   ?Stressor aopo:has_chemical_entity ?CAS .
   ?CAS a cheminf:000000 ;
     dc:title ?ChemicalName ;
     skos:exactMatch ?MatchingID .
-  #?MatchingID a cheminf:000407   #Filters for ChEBI IDs
+  #?MatchingID a cheminf:000407 ; cheminf:000407 ?ChEBI #Filters for ChEBI IDs
 }
