@@ -1,0 +1,9 @@
+#This SPARQL query extracts all KEs and their titles and measurement methods of an AOP of interest
+SELECT ?KE ?KEName ?Measurement
+WHERE {
+ ?KE a aopo:KeyEvent ;
+    dc:title ?KEName ;
+    mmo:0000000 ?Measurement ;
+    dcterms:isPartOf ?AOP .
+FILTER (?AOP = aop:38)  #This filters for KEs that are part of a selected AOP.
+}

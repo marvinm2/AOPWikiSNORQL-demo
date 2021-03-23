@@ -1,0 +1,12 @@
+#This SPARQL query finds all MIEs and AOs that are in the same AOP as a KE of interest
+SELECT distinct ?MIE ?MIEtitle ?KE ?KEname ?AO ?AOtitle WHERE {
+  ?KE a aopo:KeyEvent ; 
+     dc:title ?KEname . 
+  ?AOP a aopo:AdverseOutcomePathway ; 
+     aopo:has_key_event ?KE ;
+     aopo:has_adverse_outcome ?AO;
+     aopo:has_molecular_initiating_event ?MIE.
+  ?MIE dc:title ?MIEtitle .
+  ?AO dc:title ?AOtitle .
+FILTER (?KE = aop.events:177) #This filters for KE 177: N/A, Mitochondrial dysfunction 1
+}

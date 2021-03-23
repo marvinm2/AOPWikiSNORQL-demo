@@ -1,0 +1,15 @@
+#This SPARQL query extracts all chemicals and corresponding CAS IDs that lead to an AO of interest
+SELECT ?AO ?AOname ?AOP ?AOPName ?ChemicalName ?CAS_ID WHERE {
+  ?AO a aopo:KeyEvent ; 
+     dc:title ?AOname . 
+  ?AOP a aopo:AdverseOutcomePathway ;
+     dc:title ?AOPName ;
+     aopo:has_adverse_outcome ?AO ;
+     nci:C54571 ?Stressor .
+  OPTIONAL {?Stressor aopo:has_chemical_entity ?Chemical. 
+            ?Chemical dc:title ?ChemicalName ;
+                      cheminf:000446 ?CAS_ID.}
+FILTER regex (?AOname, "fibrosis", "i") #This filters for AOs of interest
+}
+ORDER BY DESC (?AO)
+

@@ -1,0 +1,7 @@
+#This SPARQL query extracts all KEs and their titles, and has an optional filter
+SELECT ?KE ?KEName
+WHERE {
+ ?KE a aopo:KeyEvent ;
+ dc:title ?KEName . 
+ #FILTER regex (?KEName, "mitochondrial", "i")
+}

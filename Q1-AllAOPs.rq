@@ -1,0 +1,6 @@
+#This SPARQL query extracts all AOPs and their titles
+SELECT ?AOP ?AOPName
+WHERE {
+ ?AOP a aopo:AdverseOutcomePathway ;
+ dc:title ?AOPName . 
+}
