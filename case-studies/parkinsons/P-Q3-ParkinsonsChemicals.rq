@@ -1,0 +1,24 @@
+#This SPARQL query extracts all chemicals across all Parkinson's-related AOPs
+#Provides a comprehensive list of substances linked to parkinsonian motor deficits (AO 896)
+SELECT DISTINCT ?AOP ?AOPTitle ?Chemical ?ChemicalName ?CAS_ID
+WHERE {
+  ?AO a aopo:KeyEvent ;
+      dc:title ?AOTitle .
+
+  ?AOP a aopo:AdverseOutcomePathway ;
+       dc:title ?AOPTitle ;
+       aopo:has_adverse_outcome ?AO ;
+       nci:C54571 ?Stressor .
+
+  OPTIONAL {
+    ?Stressor aopo:has_chemical_entity ?Chemical .
+    ?Chemical dc:title ?ChemicalName .
+
+    OPTIONAL {
+      ?Chemical cheminf:000446 ?CAS_ID .
+    }
+  }
+
+  FILTER (?AO = aop.events:896)  #Parkinsonian motor deficits
+}
+ORDER BY ?ChemicalName ?AOP

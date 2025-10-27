@@ -1,0 +1,15 @@
+#This SPARQL query extracts all Key Events in AOP 464 with their measurement methods
+#Essential for understanding the testable intermediate steps in the Parkinson's pathway
+SELECT ?KE ?KETitle ?Measurement
+WHERE {
+  ?KE a aopo:KeyEvent ;
+      dc:title ?KETitle ;
+      dcterms:isPartOf ?AOP .
+
+  OPTIONAL {
+    ?KE mmo:0000000 ?Measurement .
+  }
+
+  FILTER (?AOP = aop:464)
+}
+ORDER BY ?KE

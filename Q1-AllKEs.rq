@@ -3,5 +3,5 @@ SELECT ?KE ?KEName
 WHERE {
  ?KE a aopo:KeyEvent ;
  dc:title ?KEName . 
- #FILTER regex (?KEName, "mitochondrial", "i")
+ #FILTER regex (?KEName, "parkinson", "i")
 }

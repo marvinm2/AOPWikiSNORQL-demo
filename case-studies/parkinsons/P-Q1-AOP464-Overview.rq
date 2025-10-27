@@ -1,0 +1,12 @@
+#This SPARQL query extracts the complete structure of AOP 464 (VHP4Safety Parkinson's case study)
+#Including title and Key Events (KEs)
+SELECT DISTINCT ?AOP ?AOPTitle ?KE ?KETitle
+WHERE {
+  ?AOP a aopo:AdverseOutcomePathway ;
+       dc:title ?AOPTitle ;
+       aopo:has_key_event ?KE .
+  ?KE dc:title ?KETitle .
+
+  FILTER (?AOP = aop:464)
+}
+ORDER BY ?KE

@@ -1,0 +1,19 @@
+#This SPARQL query finds all AOPs that lead to parkinsonian motor deficits (AO 896)
+#Returns AOP details including MIEs to understand all pathways to Parkinson's disease
+SELECT DISTINCT ?AOP ?AOPTitle ?MIE ?MIETitle ?AO ?AOTitle
+WHERE {
+  ?AO a aopo:KeyEvent ;
+      dc:title ?AOTitle .
+
+  ?AOP a aopo:AdverseOutcomePathway ;
+       dc:title ?AOPTitle ;
+       aopo:has_adverse_outcome ?AO .
+
+  OPTIONAL {
+    ?AOP aopo:has_molecular_initiating_event ?MIE .
+    ?MIE dc:title ?MIETitle .
+  }
+
+  FILTER (?AO = aop.events:896)  #Parkinsonian motor deficits
+}
+ORDER BY ?AOP

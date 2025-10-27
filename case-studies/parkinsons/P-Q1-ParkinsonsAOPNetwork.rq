@@ -1,0 +1,19 @@
+#This SPARQL query maps the network of Parkinson's-related AOPs
+#Identifies all AOPs with "parkinson" in title or description, or leading to parkinsonian outcomes
+SELECT DISTINCT ?AOP ?AOPTitle ?AO ?AOTitle
+WHERE {
+  ?AOP a aopo:AdverseOutcomePathway ;
+       dc:title ?AOPTitle .
+
+  OPTIONAL {
+    ?AOP aopo:has_adverse_outcome ?AO .
+    ?AO dc:title ?AOTitle .
+  }
+
+  #Find AOPs related to Parkinson's by title/description or those leading to AO 896
+  FILTER (
+    regex(?AOPTitle, "parkinson", "i") ||
+    ?AO = aop.events:896
+  )
+}
+ORDER BY ?AOP
